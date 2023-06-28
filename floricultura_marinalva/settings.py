@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-87t87l=j3b-8=($y=bir+ob9!32a8@jcv9v-7+%xxq93s5_6*v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://floricultura.lukasrocha.repl.co', '127.0.0.1']
+ALLOWED_HOSTS = ['https://floricultura.lukasrocha.repl.co', '0.0.0.0:3000']
 
 # Application definition
 
