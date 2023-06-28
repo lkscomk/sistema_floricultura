@@ -77,7 +77,7 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'floricultura',
+#         'NAME': 'database',
 #         'USER': 'root',
 #         'PASSWORD': 'sql@dev',
 #         'HOST': '127.0.0.1',
