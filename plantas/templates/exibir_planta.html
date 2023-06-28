@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    {% block content %}
+    <div class="form-floating">
+        <input type="text" class="form-control" id="numeroInput" placeholder="Nome" value="{{ planta.nome }}">
+        <label for="floatingSelect">Nome</label>
+    </div>
+
+    <div class="form-floating">
+        <input type="text" class="form-control" id="numeroInput" placeholder="Espécie" value="{{ planta.especie }}">
+        <label for="floatingSelect">Espécie</label>
+    </div>
+
+    <div class="form-floating">
+      <select class="form-select" id="floatingSelect">
+          {% if planta.disponibilidade %}
+              <option selected>SIM</option>
+              <option>NÃO</option>
+          {% else %}
+             <option>SIM</option>
+              <option selected>NÃO</option>
+          {% endif %}
+      </select>
+      <label for="floatingSelect">Disponibilidade</label>
+    </div>
+
+    <div class="form-floating">
+        <input type="number" class="form-control" id="numeroInput" placeholder="Quantidade em estoque" value="{{ planta.quantidade_estoque }}">
+        <label for="floatingSelect">Quantidade em estoque</label>
+    </div>
+
+    <div class="form-floating">
+        <input type="number" class="form-control" id="numeroInput" placeholder="Valor (R$)" value="{{ planta.valor }}">
+        <label for="floatingSelect">Valor (R$) </label>
+    </div>
+
+    <div class="form-floating">
+        <textarea class="form-control" placeholder="Observações" id="floatingTextarea2" style="height: 100px">
+            {{ planta.observacoes }}
+        </textarea>
+        <label for="floatingTextarea2">Observação</label>
+    </div>
+
+    <div class="form-floating">
+      <select class="form-select" id="floatingSelect">
+          {% for usuario in usuarios %}
+              {% if usuario.id == planta.criado_por.id %}
+                  <option value="{{ usuario.id }}" selected>{{ usuario.username }}</option>
+              {% else %}
+                  <option value="{{ usuario.id }}">{{ usuario.username }}</option>
+              {% endif %}
+          {% endfor %}
+      </select>
+      <label for="floatingSelect">Criado Por</label>
+    </div>
+    <a class="btn btn-primary btn-sm" href="{% url 'lista_plantas' %}">
+        Voltar
+    </a>
+    {% endblock %}
+</body>
+
+</html>

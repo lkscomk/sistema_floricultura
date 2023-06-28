@@ -1,0 +1,14 @@
+# Arquivos e diretórios específicos do Django
+*.pyc
+__pycache__/
+*.sqlite3
+
+# Diretório do ambiente virtual
+venv/
+
+# Arquivos de configuração locais
+*.env
+
+# Outros arquivos e diretórios gerados
+media/
+staticfiles/
