@@ -16,60 +16,67 @@
 
 <body>
     {% block content %}
+    <h1>Exibir Planta</h1>
     <div class="form-floating">
-        <input type="text" class="form-control" id="numeroInput" placeholder="Nome" value="{{ planta.nome }}">
+        <input type="text" class="form-control" id="numeroInput" placeholder="Nome" value="{{ planta.nome }}" disabled>
         <label for="floatingSelect">Nome</label>
     </div>
 
     <div class="form-floating">
-        <input type="text" class="form-control" id="numeroInput" placeholder="Espécie" value="{{ planta.especie }}">
+        <input type="text" class="form-control" id="numeroInput" placeholder="Espécie" value="{{ planta.especie }}" disabled>
         <label for="floatingSelect">Espécie</label>
     </div>
 
     <div class="form-floating">
-      <select class="form-select" id="floatingSelect">
-          {% if planta.disponibilidade %}
-              <option selected>SIM</option>
-              <option>NÃO</option>
-          {% else %}
-             <option>SIM</option>
-              <option selected>NÃO</option>
-          {% endif %}
-      </select>
-      <label for="floatingSelect">Disponibilidade</label>
+        <select class="form-select" id="floatingSelect" disabled>
+            {% if planta.disponibilidade %}
+                <option selected>SIM</option>
+                <option>NÃO</option>
+            {% else %}
+                <option>SIM</option>
+                <option selected>NÃO</option>
+            {% endif %}
+        </select>
+        <label for="floatingSelect">Disponibilidade</label>
     </div>
 
     <div class="form-floating">
-        <input type="number" class="form-control" id="numeroInput" placeholder="Quantidade em estoque" value="{{ planta.quantidade_estoque }}">
+        <input type="number" class="form-control" id="numeroInput" placeholder="Quantidade em estoque" value="{{ planta.quantidade_estoque }}" disabled>
         <label for="floatingSelect">Quantidade em estoque</label>
     </div>
 
     <div class="form-floating">
-        <input type="number" class="form-control" id="numeroInput" placeholder="Valor (R$)" value="{{ planta.valor }}">
-        <label for="floatingSelect">Valor (R$) </label>
+        <input type="number" class="form-control" id="numeroInput" placeholder="Valor (R$)" value="{{ planta.valor }}" disabled>
+        <label for="floatingSelect">Valor (R$)</label>
     </div>
 
     <div class="form-floating">
-        <textarea class="form-control" placeholder="Observações" id="floatingTextarea2" style="height: 100px">
+        <textarea class="form-control" placeholder="Observações" id="floatingTextarea2" style="height: 100px" disabled>
             {{ planta.observacoes }}
         </textarea>
         <label for="floatingTextarea2">Observação</label>
     </div>
 
     <div class="form-floating">
-      <select class="form-select" id="floatingSelect">
-          {% for usuario in usuarios %}
-              {% if usuario.id == planta.criado_por.id %}
-                  <option value="{{ usuario.id }}" selected>{{ usuario.username }}</option>
-              {% else %}
-                  <option value="{{ usuario.id }}">{{ usuario.username }}</option>
-              {% endif %}
-          {% endfor %}
-      </select>
-      <label for="floatingSelect">Criado Por</label>
+        <select class="form-select" id="floatingSelect" disabled>
+            {% for usuario in usuarios %}
+                {% if usuario.id == planta.criado_por.id %}
+                    <option value="{{ usuario.id }}" selected>{{ usuario.username }}</option>
+                {% else %}
+                    <option value="{{ usuario.id }}">{{ usuario.username }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="floatingSelect">Criado Por</label>
     </div>
     <a class="btn btn-primary btn-sm" href="{% url 'lista_plantas' %}">
         Voltar
+    </a>
+    <a class="btn btn-primary btn-sm" href="{% url 'editar_planta' id=planta.id %}">
+        EDITAR
+    </a>
+    <a class="btn btn-primary btn-sm" href="{% url 'excluir_planta' planta.id %}">
+        Excluir
     </a>
     {% endblock %}
 </body>

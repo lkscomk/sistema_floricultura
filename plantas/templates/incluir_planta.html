@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    {% block content %}
+    <div class="container">
+        <h1>Incluir Planta</h1>
+        <form method="POST" action="{% url 'incluir_planta' %}">
+            {% csrf_token %}
+            <div class="form-floating">
+                <input type="text" class="form-control" id="nomeInput" name="nome" placeholder="Nome" required>
+                <label for="nomeInput">Nome</label>
+            </div>
+
+            <div class="form-floating">
+                <input type="text" class="form-control" id="especieInput" name="especie" placeholder="Espécie" required>
+                <label for="especieInput">Espécie</label>
+            </div>
+
+            <div class="form-floating">
+                <select class="form-select" id="disponibilidadeSelect" name="disponibilidade" required>
+                    <option selected disabled>Selecione</option>
+                    <option value="sim">Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+                <label for="disponibilidadeSelect">Disponibilidade</label>
+            </div>
+
+            <div class="form-floating">
+                <input type="number" class="form-control" id="quantidadeInput" name="quantidade_estoque" placeholder="Quantidade em estoque" required>
+                <label for="quantidadeInput">Quantidade em estoque</label>
+            </div>
+
+            <div class="form-floating">
+                <input type="number" class="form-control" id="valorInput" name="valor" placeholder="Valor (R$)" required>
+                <label for="valorInput">Valor (R$)</label>
+            </div>
+
+            <div class="form-floating">
+                <textarea class="form-control" id="observacoesTextarea" name="observacoes" placeholder="Observações" style="height: 100px"></textarea>
+                <label for="observacoesTextarea">Observações</label>
+            </div>
+
+            <div class="form-floating">
+                <select class="form-select" id="criadoPorSelect" name="criadoPor" required>
+                    <option selected disabled>Selecione</option>
+                    {% for usuario in usuarios %}
+                    <option value="{{ usuario.id }}">{{ usuario.username }}</option>
+                    {% endfor %}
+                </select>
+                <label for="criadoPorSelect">Criado Por</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-sm">Incluir</button>
+            <a class="btn btn-primary btn-sm" href="{% url 'lista_plantas' %}">
+                Voltar
+            </a>
+        </form>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

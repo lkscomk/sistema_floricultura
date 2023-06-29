@@ -34,9 +34,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
+                        {% if request.user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'lista_plantas' %}">Estoque De Plantas</a>
                         </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'contatos' %}">Contato</a>
                         </li>
@@ -45,11 +47,16 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            {% if request.user.is_authenticated %}
+                        {% if request.user.is_authenticated %}
+                           <li class="nav-item">
                                 <span class="nav-link">{{ request.user.email }}</span>
-                            {% endif %}
-                        </li>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-secondary" href="{% url 'logout' %}">
+                                    Logout
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
 

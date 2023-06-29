@@ -9,7 +9,7 @@ class Plantas(models.Model):
     quantidade_estoque = models.PositiveIntegerField()
     criado_em = models.DateTimeField(auto_now_add=True)
     criado_por = models.ForeignKey(User, on_delete=models.CASCADE)
-    observacoes = models.TextField()
+    observacoes = models.TextField(blank=True)
 
     def __str__(self):
         return self.nome

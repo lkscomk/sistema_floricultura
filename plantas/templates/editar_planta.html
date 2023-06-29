@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    {% block content %}
+    <h1>Editar Planta</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-floating">
+            <input type="text" class="form-control" id="nomeInput" placeholder="Nome" name="nome" value="{{ planta.nome }}">
+            <label for="nomeInput">Nome</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" id="especieInput" placeholder="Espécie" name="especie" value="{{ planta.especie }}">
+            <label for="especieInput">Espécie</label>
+        </div>
+
+        <div class="form-floating">
+            <select class="form-select" id="disponibilidadeSelect" name="disponibilidade">
+                <option value="SIM" {% if planta.disponibilidade == "SIM" %}selected{% endif %}>SIM</option>
+                <option value="NÃO" {% if planta.disponibilidade == "NÃO" %}selected{% endif %}>NÃO</option>
+            </select>
+            <label for="disponibilidadeSelect">Disponibilidade</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="number" class="form-control" id="quantidadeEstoqueInput" placeholder="Quantidade em estoque" name="quantidade_estoque" value="{{ planta.quantidade_estoque }}">
+            <label for="quantidadeEstoqueInput">Quantidade em estoque</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="number" class="form-control" id="valorInput" placeholder="Valor (R$)" name="valor" value="{{ planta.valor }}">
+            <label for="valorInput">Valor (R$)</label>
+        </div>
+
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Observações" id="observacoesTextarea" style="height: 100px" name="observacoes">{{ planta.observacoes }}</textarea>
+            <label for="observacoesTextarea">Observação</label>
+        </div>
+
+        <div class="form-floating">
+            <select class="form-select" id="criadoPorSelect" name="criado_por">
+                {% for usuario in usuarios %}
+                    <option value="{{ usuario.id }}" {% if usuario.id == planta.criado_por.id %}selected{% endif %}>{{ usuario.username }}</option>
+                {% endfor %}
+            </select>
+            <label for="criadoPorSelect">Criado Por</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a class="btn btn-secondary" href="{% url 'exibir_planta' id=planta.id %}">Cancelar</a>
+    </form>
+    {% endblock %}
+</body>
+
+</html>
