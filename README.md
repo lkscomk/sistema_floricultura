@@ -19,3 +19,26 @@ python manage.py runserver
 ```
 python manage.py migrate
 ```
+USE A ESTRUTURA ABAIXO PARA MEXER EM UM BANCO GENERICO:
+
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+```
+USE A ESTRUTURA A BAIXO PARA MEXER EM UM BANCO NA MAQUIN, USANDO MYSQL
+```
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': 'floricultura',
+         'USER': 'root',
+         'PASSWORD': 'SENHA',
+         'HOST': '127.0.0.1',
+         'PORT': '3306',
+     }
+}
+```
