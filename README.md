@@ -20,7 +20,7 @@ python manage.py runserver
 python manage.py migrate
 ```
 USE A ESTRUTURA ABAIXO PARA MEXER EM UM BANCO GENERICO:
-
+floricultura_marinalva\settings.py 
 ```
 DATABASES = {
     'default': {
@@ -30,6 +30,7 @@ DATABASES = {
 }
 ```
 USE A ESTRUTURA A BAIXO PARA MEXER EM UM BANCO NA MAQUIN, USANDO MYSQL
+floricultura_marinalva\settings.py
 ```
 DATABASES = {
      'default': {
