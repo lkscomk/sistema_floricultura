@@ -16,11 +16,16 @@
 
 <body>
     {% block content %}
+    <div class="card card-primary d-flex" style="margin: 10%;">
+        
+        <section class="d-flex">
+            <div class="container-fluid w-100">
+              <div class="row d-flex justify-content-center align-items-center h-100  m-20">
     <h1>Lista de Plantas</h1>
-    <form method="GET" action="{% url 'lista_plantas' %}">
-        <input type="text" name="nome" placeholder="Filtrar por Nome" value="{{ filtro.nome }}">
-        <input type="text" name="especie" placeholder="Filtrar por Especie" value="{{ filtro.especie }}">
-        <button type="submit">Filtrar</button>
+    <form method="GET" action="{% url 'lista_plantas' %}" >
+        <input type="text" class="form-control-md" name="nome" placeholder="Filtrar por Nome" value="{{ filtro.nome }}">
+        <input type="text"class="form-control-md"  name="especie" placeholder="Filtrar por Especie" value="{{ filtro.especie }}">
+        <button class="btn btn-outline-secondary" type="submit" style="color: rgb(187, 141, 230)">Filtrar</button>
     </form>
     <table class="table">
         <thead>
@@ -58,13 +63,21 @@
             {% endfor %}
         </tbody>
     </table>
+    <div>
     <a class="btn btn-primary btn-sm" href="{% url 'home' %}">
         Voltar
     </a>
     <a class="btn btn-primary btn-sm" href="{% url 'incluir_planta' %}">
         Adicionar +
     </a>
-    {% endblock %}
+</div>
+    
+</div>
+</div>
+</section>
+
+</div>
+{% endblock %}
 </body>
 
 </html>
