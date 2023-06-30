@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.contrib import messages
 from .models import Plantas
 
@@ -75,8 +76,21 @@ def incluir_planta(request):
 
 @login_required #so pode acessa essa view se tiver logado
 def lista_plantas(request):
+    nome = request.GET.get('nome') if request.GET.get('nome') else ''
+    especie = request.GET.get('especie') if request.GET.get('especie') else ''
+
     plantas = Plantas.objects.all()
-    return render(request, 'lista_plantas.html', {'plantas': plantas})
+
+    if nome and especie:
+        plantas = plantas.filter(Q(nome__icontains=nome) & Q(especie__icontains=especie))
+    elif nome:
+        plantas = plantas.filter(nome__icontains=nome)
+    elif especie:
+        plantas = plantas.filter(especie__icontains=especie)
+
+    filtro = {'nome': nome, 'especie': especie}
+
+    return render(request, 'lista_plantas.html', {'plantas': plantas, 'filtro': filtro})
 
 @login_required #so pode acessa essa view se tiver logado
 def exibir_planta(request, id):

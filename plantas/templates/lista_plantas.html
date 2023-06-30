@@ -17,6 +17,11 @@
 <body>
     {% block content %}
     <h1>Lista de Plantas</h1>
+    <form method="GET" action="{% url 'lista_plantas' %}">
+        <input type="text" name="nome" placeholder="Filtrar por Nome" value="{{ filtro.nome }}">
+        <input type="text" name="especie" placeholder="Filtrar por Especie" value="{{ filtro.especie }}">
+        <button type="submit">Filtrar</button>
+    </form>
     <table class="table">
         <thead>
             <tr>
